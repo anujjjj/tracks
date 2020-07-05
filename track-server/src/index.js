@@ -6,14 +6,14 @@ const bodyParser = require('body-parser');
 const authRoutes = require('./routes/authRoutes');
 const trackRoutes = require('./routes/trackRoutes');
 const requireAuth = require('./middlewares/requireAuth');
-
+const mongoUri = require('./config/keys')
 const app = express();
 
 app.use(bodyParser.json());
 app.use(authRoutes);
 app.use(trackRoutes);
 
-const mongoUri = 'mongodb://a:147532@cluster0-shard-00-00-3m8qh.mongodb.net:27017,cluster0-shard-00-01-3m8qh.mongodb.net:27017,cluster0-shard-00-02-3m8qh.mongodb.net:27017/blog?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true&w=majority'
+
 if (!mongoUri) {
   throw new Error(
     `MongoURI was not supplied.  Make sure you watch the video on setting up Mongo DB!`
