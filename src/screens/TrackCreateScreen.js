@@ -13,7 +13,6 @@ const TrackCreateScreen = ({ isFocused }) => {
   const {
     state: { recording, distanceTravelled },
     addLocation
-
   } = useContext(LocationContext);
   const callback = useCallback(
     location => {

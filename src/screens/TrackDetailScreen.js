@@ -23,6 +23,7 @@ const TrackDetailScreen = ({ navigation }) => {
       >
         <Polyline coordinates={track.locations.map(loc => loc.coords)} />
       </MapView>
+      <Text >Distance Travelled : {track.distanceTravelled ? track.distanceTravelled : "not calculated"}</Text>
     </>
   );
 };

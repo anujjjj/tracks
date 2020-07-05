@@ -29,7 +29,7 @@ const locationReducer = (state, action) => {
     case 'change_name':
       return { ...state, name: action.payload };
     case 'reset':
-      return { ...state, name: '', locations: [] };
+      return { ...state, name: '', locations: [], distanceTravelled: 0 };
     default:
       return state;
   }
