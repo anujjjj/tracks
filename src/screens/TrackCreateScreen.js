@@ -11,8 +11,9 @@ import { FontAwesome } from '@expo/vector-icons';
 
 const TrackCreateScreen = ({ isFocused }) => {
   const {
-    state: { recording },
+    state: { recording, distanceTravelled },
     addLocation
+
   } = useContext(LocationContext);
   const callback = useCallback(
     location => {
@@ -21,12 +22,13 @@ const TrackCreateScreen = ({ isFocused }) => {
     [recording]
   );
   const [err] = useLocation(isFocused || recording, callback);
-
+  console.log(distanceTravelled);
   return (
     <SafeAreaView forceInset={{ top: 'always' }}>
       <Text h2>Create a Track</Text>
       <Map />
       {err ? <Text>Please enable location services</Text> : null}
+      <Text >Distance Travelled : {distanceTravelled}</Text>
       <TrackForm />
     </SafeAreaView>
   );
