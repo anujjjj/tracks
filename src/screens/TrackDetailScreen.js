@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import { Context as TrackContext } from '../context/TrackContext';
 import MapView, { Polyline } from 'react-native-maps';
+import moment from 'moment';
 
 const TrackDetailScreen = ({ navigation }) => {
   const { state } = useContext(TrackContext);
@@ -9,6 +10,12 @@ const TrackDetailScreen = ({ navigation }) => {
 
   const track = state.find(t => t._id === _id);
   const initialCoords = track.locations[0].coords;
+
+  const endDuration = moment(track.locations[track.locations.length - 1].timestamp);
+  const startDuration = moment(track.locations[0].timestamp);
+  // console.log();
+  const duration = moment.duration(endDuration.diff(startDuration));
+  // console.log(duration.as('minutes'));
 
   return (
     <>
@@ -24,6 +31,7 @@ const TrackDetailScreen = ({ navigation }) => {
         <Polyline coordinates={track.locations.map(loc => loc.coords)} />
       </MapView>
       <Text >Distance Travelled : {track.distanceTravelled ? track.distanceTravelled : "not calculated"}</Text>
+      <Text >Duration : {parseFloat(duration.as('minutes')).toFixed(2)} minutes</Text>
     </>
   );
 };

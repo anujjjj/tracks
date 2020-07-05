@@ -8,10 +8,11 @@ import { Context as LocationContext } from '../context/LocationContext';
 import useLocation from '../hooks/useLocation';
 import TrackForm from '../components/TrackForm';
 import { FontAwesome } from '@expo/vector-icons';
+import moment from 'moment';
 
 const TrackCreateScreen = ({ isFocused }) => {
   const {
-    state: { recording, distanceTravelled },
+    state: { recording, distanceTravelled, locations },
     addLocation
   } = useContext(LocationContext);
   const callback = useCallback(
@@ -27,6 +28,7 @@ const TrackCreateScreen = ({ isFocused }) => {
       <Map />
       {err ? <Text>Please enable location services</Text> : null}
       <Text >Distance Travelled : {distanceTravelled}</Text>
+      <Text >Duration : {locations[0] && parseFloat(moment.duration(moment().diff(moment(locations[0].timestamp))).as('minutes')).toFixed(2) || 0} minutes</Text>
       <TrackForm />
     </SafeAreaView>
   );
